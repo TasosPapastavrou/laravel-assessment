@@ -103,7 +103,7 @@ class BlogController extends Controller
 
         $input = $request->input();
         // $post = $this->user->posts()->where('id','=',$postId)->first();
-        $isUpdate = $findPost->postDetailsChange($input,$findPost);
+        // $isUpdate = $findPost->postDetailsChange($input,$findPost);
         $user = $this->user;
         
         $title = $input['title'] ?? null;
@@ -111,6 +111,13 @@ class BlogController extends Controller
         $author = $input['author'] ?? null;
         $slug = $input['slug'] ?? null;
         $userId = $user->id;
+
+        $data = [
+            "title" => $title,
+            "content" => $content
+        ];
+        
+        $isUpdate = $findPost->postDetailsChange($data,$findPost);
 
         if($isUpdate){
             $tagUpdate = Tag::where('title','=','edited')->first(); 
