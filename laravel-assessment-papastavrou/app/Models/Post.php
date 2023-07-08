@@ -40,7 +40,7 @@ class Post extends Model
 
     public function postDetailsChange($updatePostValues,$oldPost){
 
-        if($updatePostValues['title'] != $oldPost->title || $updatePostValues['content'] != $oldPost->content)
+        if(($updatePostValues['title'] != $oldPost->title && !is_null($updatePostValues['title'])) || (!is_null($updatePostValues['content']) && $updatePostValues['content'] != $oldPost->content))
             return true;
         else
             return false;        
