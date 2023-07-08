@@ -106,10 +106,10 @@ class BlogController extends Controller
         $isUpdate = $findPost->postDetailsChange($input,$findPost);
         $user = $this->user;
         
-        $title = $input['title'];
-        $content = $input['content'];
-        $author = $input['author'];
-        $slug = $input['slug'];
+        $title = $input['title'] ?? null;
+        $content = $input['content'] ?? null;
+        $author = $input['author'] ?? null;
+        $slug = $input['slug'] ?? null;
         $userId = $user->id;
 
         if($isUpdate){
@@ -118,11 +118,21 @@ class BlogController extends Controller
             $findPost->tags()->attach([$tagId]);
         }
 
-        $findPost->title = $title;
-        $findPost->content = $content;
-        $findPost->author = $author;
-        $findPost->slug = $slug;
-        $findPost->user_id = $userId;
+        if($title)
+            $findPost->title = $title;
+        
+        if($content)
+            $findPost->content = $content;
+        
+        if($author)
+            $findPost->author = $author;
+        
+        if($slug)
+            $findPost->slug = $slug;
+        
+        if($userId)
+            $findPost->user_id = $userId;
+
         $findPost->save(); 
 
         return response()->json(['message'=> 'successfull post update'],200);
