@@ -92,7 +92,7 @@ class BlogController extends Controller
 
         return response()->json(['message'=>'successfull post delete'],202);
 
-    }
+    } 
 
     public function postUpdate(Request $request,$postId){
 
