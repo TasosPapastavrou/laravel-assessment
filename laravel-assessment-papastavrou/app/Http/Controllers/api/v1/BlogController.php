@@ -188,7 +188,8 @@ class BlogController extends Controller
         ]);
 
         $input = $request->input();
-        $post = $this->user->posts()->filterByIdAndSlug($input)->with('tags')->first();
+        // $post = $this->user->posts()->filterByIdAndSlug($input)->with('tags')->first();
+        $post = Post::filterByIdAndSlug($input)->with('tags')->first();
 
         return response()->json(['post'=>$post],200);
         
